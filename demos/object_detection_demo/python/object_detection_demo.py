@@ -48,7 +48,7 @@ def build_argparser():
     args.add_argument('-m', '--model', help='Required. Path to an .xml file with a trained model.',
                       required=True, type=Path)
     args.add_argument('-at', '--architecture_type', help='Required. Specify model\' architecture type.',
-                      type=str, required=True, choices=('ssd', 'yolo', 'yolov4', 'faceboxes', 'centernet', 'ctpn',
+                      type=str, required=True, choices=('ssd', 'yolo', 'yolov4', 'yolof', 'faceboxes', 'centernet', 'ctpn',
                                                         'retinaface', 'ultra_lightweight_face_detection',
                                                         'retinaface-pytorch'))
     args.add_argument('-i', '--input', required=True,
@@ -174,6 +174,9 @@ def get_model(ie, args):
     elif args.architecture_type == 'yolov4':
         return models.YoloV4(ie, args.model, labels=args.labels,
                              threshold=args.prob_threshold, keep_aspect_ratio=args.keep_aspect_ratio)
+    elif args.architecture_type == 'yolof':
+        return models.YOLOF(ie, args.model, labels=args.labels,
+                            threshold=args.prob_threshold, keep_aspect_ratio=args.keep_aspect_ratio)
     elif args.architecture_type == 'faceboxes':
         return models.FaceBoxes(*common_args, threshold=args.prob_threshold)
     elif args.architecture_type == 'centernet':
