@@ -148,7 +148,6 @@ class YOLO(Model):
 
     @staticmethod
     def _filter(detections, iou_threshold):
-        print(iou_threshold)
         def iou(box_1, box_2):
             width_of_overlap_area = min(box_1.xmax, box_2.xmax) - max(box_1.xmin, box_2.xmin)
             height_of_overlap_area = min(box_1.ymax, box_2.ymax) - max(box_1.ymin, box_2.ymin)
@@ -209,6 +208,7 @@ class YOLO(Model):
             detections += self._parse_yolo_region(out_blob, meta['resized_shape'], layer_params[1], self.threshold)
 
         detections = self._filter(detections, self.iou_threshold)
+
         if self.keep_aspect_ratio:
             detections = self._resize_detections_letterbox(detections, meta['original_shape'][1::-1],
                                                            meta['resized_shape'][1::-1])
@@ -360,5 +360,6 @@ class YOLOF(YOLO):
                 confidence = class_probabilities[class_id]
                 objects.append(Detection(x - width / 2, y - height / 2, x + width / 2, y + height / 2,
                                          confidence.item(), class_id.item()))
-                print(x - width / 2, y - height / 2, x + width / 2, y + height / 2, confidence.item(), class_id.item())
+                # print(x - width / 2, y - height / 2, x + width / 2, y + height / 2, confidence.item(), class_id.item())
+        print(len(objects))
         return objects
