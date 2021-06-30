@@ -160,3 +160,4 @@
 | yolo-v3-tiny-tf | YES | YES | YES |
 | yolo-v4-tf | YES | YES | YES |
 | yolo-v4-tiny-tf | YES | YES |    |
+| yolof | YES |   |    |
